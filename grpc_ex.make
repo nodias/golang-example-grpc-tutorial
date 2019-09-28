@@ -8,11 +8,11 @@ all : clean build
 clean:
 	rm -rf $(OUTPUT)
 
-build:
-	go build -o $(OUTPUT) $(SERVER)/main.go
+build-server:
+	env GOOS=darwin GOARCH=amd64 go build -o $(OUTPUT)/server $(SERVER)/main.go
 
-call:
-	go build -o $(OUTPUT) $(CLIENT)/main.go
+build-client:
+	env GOOS=darwin GOARCH=amd64 go build -o $(OUTPUT)/client $(CLIENT)/main.go
 
 proto:
 	protoc --go_out=plugins=grpc:. $(GRPCDIR)/helloworld.proto
